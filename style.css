@@ -1,0 +1,55 @@
+.grid {
+	display:flex;
+	flex-wrap: wrap;
+	border:1px solid;
+	width: 300px;
+	height: 400px;
+	background-image: url('grid.png');
+	margin:0 auto;
+}
+.grid div {
+	width: 20px;
+	height: 20px;
+}
+.shooter {
+	background-image: url('shooter.png');
+	width:70px!important;
+	height:100px!important;
+	background-repeat:no-repeat;
+}
+.invader {
+	border-radius:10px;
+	background:#33cc66;
+	box-shadow:white 1px 1px 2px;
+	background-image: url('corona.png');
+	animation-name: invaderAnimation;
+	animation-duration: 4s;
+	transform: rotate(20deg);
+}
+.boom {
+	background-image: url('boom.png');
+}
+.laser {
+	background-image: url('laser.png');
+}
+@keyframes invaderAnimation {
+   0%   {background-color:red; left:0px; top:0px;}
+  25%  {background-color:yellow; left:200px; top:0px;}
+  50%  {background-color:blue; left:200px; top:200px;}
+  75%  {background-color:green; left:0px; top:200px;}
+  100% {background-color:red; left:0px; top:0px;transform: rotate(20deg);}
+}
+
+body {
+	font-family:arial;
+}
+
+a {
+	text-decoration:none;
+	padding:10px;
+	background:#339966;
+	color:white;
+	margin-bottom:10px;
+	margin-top:3px;
+	font-weight:bold;
+}
