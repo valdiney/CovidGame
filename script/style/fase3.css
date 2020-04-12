@@ -4,7 +4,7 @@
 	border:1px solid;
 	width: 300px;
 	height: 400px;
-	background-image: url('grid.png');
+	background-image: url('grid3.png');
 	margin:0 auto;
 }
 .grid div {
@@ -21,7 +21,7 @@
 	border-radius:10px;
 	background:#33cc66;
 	box-shadow:white 1px 1px 2px;
-	background-image: url('corona.png');
+	background-image: url('corona3.png');
 	animation-name: invaderAnimation;
 	animation-duration: 4s;
 	transform: rotate(20deg);
@@ -30,11 +30,11 @@
 	background-image: url('boom.png');
 }
 .laser {
-	background-image: url('laser.png');
+	background-image: url('laser3.png');
 }
 @keyframes invaderAnimation {
-   0%   {background-color:red; left:0px; top:0px;}
-  25%  {background-color:yellow; left:200px; top:0px;}
+  0%   {background-color:red; left:0px; top:0px;}
+  25%  {background-color:black;}
   50%  {background-color:blue; left:200px; top:200px;}
   75%  {background-color:green; left:0px; top:200px;}
   100% {background-color:red; left:0px; top:0px;transform: rotate(20deg);}
@@ -52,4 +52,11 @@ a {
 	margin-bottom:10px;
 	margin-top:3px;
 	font-weight:bold;
+}
+
+.perdeu {
+	background:transparent;
+	border:0;
+	box-shadow:transparent 0,0,0;
+	background-image: url('perdeu.png')!important;
 }

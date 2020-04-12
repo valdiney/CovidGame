@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let alienInvadersTakenDown = []
   let result = 0
   let direction = 1
-  let invaderId
+  let invaderId;
+  let perdeu = false;
 
   //define the alien invaders
   const alienInvaders = [
@@ -25,16 +26,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //move the shooter along a line
   function moveShooter(e) {
-    squares[currentShooterIndex].classList.remove('shooter')
-    switch(e.keyCode) {
-      case 37:
-        if(currentShooterIndex % width !== 0) currentShooterIndex -= 1
-        break
-      case 39:
-        if(currentShooterIndex % width < width - 1) currentShooterIndex += 1
-        break
-    }
-    squares[currentShooterIndex].classList.add('shooter')
+    if (perdeu !== true) {
+      squares[currentShooterIndex].classList.remove('shooter')
+      switch(e.keyCode) {
+        case 37:
+          if(currentShooterIndex % width !== 0) currentShooterIndex -= 1
+          break
+        case 39:
+          if(currentShooterIndex % width < width - 1) currentShooterIndex += 1
+          break
+      }
+
+      squares[currentShooterIndex].classList.add('shooter')
+      
+      }
   }
   document.addEventListener('keydown', moveShooter)
 
@@ -46,8 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if ((leftEdge && direction === -1) || (rightEdge && direction === 1)){
         direction = width
       } else if (direction === width) {
-	      if (leftEdge) direction = 1
-	      else direction = -1
+        if (leftEdge) direction = 1
+        else direction = -1
       }
 
       for (let i = 0; i <= alienInvaders.length - 1; i++) {
@@ -68,12 +73,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (squares[currentShooterIndex].classList.contains('invader', 'shooter')) {
       resultDisplay.textContent = 'Você perdeu'
       squares[currentShooterIndex].classList.add('boom')
+      document.querySelector('.shooter').style.backgroundImage = "url('script/style/perdeu.png')";
+      document.querySelector('.shooter').classList.add('perdeu')
+      perdeu = true
       clearInterval(invaderId)
     }
 
     for (let i = 0; i <= alienInvaders.length - 1; i++){
       if (alienInvaders[i] > (squares.length - (width -1))) {
         resultDisplay.textContent = 'Você perdeu'
+        squares[currentShooterIndex].classList.add('boom')
+        document.querySelector('.shooter').style.backgroundImage = "url('script/style/perdeu.png')";
+        document.querySelector('.shooter').classList.add('perdeu')
+        perdeu = true
         clearInterval(invaderId)
       }
     }
@@ -84,13 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(alienInvaders.length)
       resultDisplay.textContent = 'Você venceu!'
       clearInterval(invaderId)
+      //window.location = 'fase3.html';
     }
   }
-  invaderId = setInterval(moveInvaders, 500)
+  invaderId = setInterval(moveInvaders, 100)
 
   //shoot at aliens
   function shoot(e) {
-  	document.querySelector('.shooter').style.backgroundImage = "url('shooter.png')";
+    document.querySelector('.shooter').style.backgroundImage = "url('script/style/shooter.png')";
     let laserId
     let currentLaserIndex = currentShooterIndex
     //move the laser from the shooter to the alien invader
@@ -121,15 +134,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     switch(e.keyCode) {
       case 32:
-        document.querySelector('.shooter').style.backgroundImage = "url('shooter2.png')";
+      if (perdeu !== true) {
+        document.querySelector('.shooter').style.backgroundImage = "url('script/style/shooter2.png')";
         laserId = setInterval(moveLaser, 100)
         break
+      }
+        
     }
   }
 
   document.addEventListener('keyup', shoot)
 })
-
-
-
-
